@@ -20,8 +20,16 @@ text2 = "Enter the following details"
 title2 = "Youtube Video Downloader"
   
 input_list2 = ["URL", "Video type (mp3, MP3 or mp4, MP4)"]
+
+
    
 output = multenterbox(text2, title2, input_list2)
+print(output[0])
+print(output[1])
+if "http" not in output[0]:
+    print("iojeoiwjeoiwq")
+    output.close()
+    
 
 title3 = "Youtube Video Downloader"
   
