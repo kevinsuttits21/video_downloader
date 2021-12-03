@@ -8,10 +8,7 @@ text = "Do you want to import one video \"video\" or playlist \"playlist\"? "
 title = "Youtube Video Downloader"
 input_list = ["Answer"]
 output2 = multenterbox(text,title,input_list)
-for rida in output2:
-    if not rida.startswith("https://"):
-        msgbox("Wrong information! Please launch the program again!")
-        output2.close()
+
         
         
     
@@ -84,5 +81,4 @@ elif choose == "playlist":
             video.streams.get_by_itag(nr)
             video.download()
 print("Download completed")
-
 
