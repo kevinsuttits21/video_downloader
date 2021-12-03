@@ -9,35 +9,22 @@ title = "Youtube Video Downloader"
 input_list = ["Answer"]
 output2 = multenterbox(text,title,input_list)
 
-        
-        
-    
-
 kast2 = msgbox
-
 text2 = "Enter the following details"
-  
-title2 = "Youtube Video Downloader"
-  
-input_list2 = ["URL", "Video type (mp3, MP3 or mp4, MP4)"]
-
-
-   
+title2 = "Youtube Video Downloader"  
+input_list2 = ["URL", "Video type (mp3, MP3 or mp4, MP4)"]   
 output = multenterbox(text2, title2, input_list2)
-print(output[0])
-print(output[1])
+
 if "http" not in output[0]:
-    print("iojeoiwjeoiwq")
+    title = "Youtube Video Downloader"
+    message000 = ("Wrong information! Please relaunch the program and insert the correct details.")
+    msgbox(message000, title)
     output.close()
     
 
-title3 = "Youtube Video Downloader"
-  
+title3 = "Youtube Video Downloader"  
 message3 = ("Thank you!" + " Please wait for the video to download :)")
-
 kast = msgbox(message3, title3)
-
-
 
 
 choose = input("Do you want to import one video (\"video\") or playlist (\"playlist\")? ".lower())
@@ -89,4 +76,3 @@ elif choose == "playlist":
             video.streams.get_by_itag(nr)
             video.download()
 print("Download completed")
-
