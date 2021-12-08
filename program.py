@@ -1,9 +1,6 @@
 from pytube import YouTube, Playlist
 import os
 from easygui import *
-
-
-
 text = "Do you want to import one video \"video\" or playlist \"playlist\"? "
 title = "Youtube Video Downloader"
 input_list = ["Answer"]   
@@ -12,16 +9,11 @@ output2 = multenterbox(text,title,input_list)
 k = 0
 if output2[0] == "video":
     k = k + 5
-else:
-    k = k + 0
-    
-if output2[0] == "playlist":
+elif output2[0] == "playlist":
     k = k + 5
 else:
     k = k + 0
     
-
-
 if k < 1:
     title = "Youtube Video Downloader"
     message000 = ("Wrong information! Please relaunch the program and insert the correct details.")
@@ -33,8 +25,6 @@ elif k <= 1:
     msgbox(message000, title)
     output2.close()
     
-    
-
 
 kast2 = msgbox
 text2 = "Enter the following details"
@@ -77,7 +67,7 @@ message3 = ("Thank you!" + " Please wait for the video to download :)")
 kast = msgbox(message3, title3)
 
 
-choose = input("Do you want to import one video (\"video\") or playlist (\"playlist\")? ".lower())
+choose = input("Do you want to import one video (\"video\") or playlist (\"playlist\")? ").lower()
 if choose == "video":
     url = str(input("Enter the link of YouTube video you want to download:  "))
     yt = YouTube(url)
@@ -85,11 +75,13 @@ elif choose == "playlist":
     url = str(input("Enter the link of YouTube playlist you want to download:  "))
     yt = Playlist(url)
 
-valik = input("Do you want MP3 or MP4? ")
-if valik == "MP3" or "mp3":
+valik = input("Do you want MP3 or MP4? ").lower()
+if valik =="mp3":
     nr = 251
-else:
+elif valik == "mp4":
     nr = 137
+else:
+    exit()
     
 if choose == "video":
     print("----------------------------------------")
@@ -99,14 +91,17 @@ if choose == "video":
     print("Rating of video: ", round(yt.rating, 1))
     print("----------------------------------------")
     print(f'Downloading: {yt.title}')
-    if valik == "MP3" or "mp3":
+    if valik == "mp3":
         vide = yt.streams.get_by_itag(nr)
         downloaded_file = vide.download()
         base, ext = os.path.splitext(downloaded_file)
         new_file = base + '.mp3'
         os.rename(downloaded_file, new_file)
+    elif valik == "mp4":
+        vide = yt.streams.get_highest_resolution()
+        vide.download()
     else:
-        yt.streams.get_by_itag(nr)
+        exit()
 elif choose == "playlist":
     print("----------------------------------------")
     print("Playlist name: ",yt.title)
@@ -116,13 +111,15 @@ elif choose == "playlist":
     print("----------------------------------------")
     print(f'Downloading: {yt.title}')
     for video in yt.videos:
-        if valik == "MP3" or "mp3":
+        if valik == "mp3":
             video = video.streams.get_by_itag(nr)
             downloaded_file = video.download()
             base, ext = os.path.splitext(downloaded_file)
             new_file = base + '.mp3'
             os.rename(downloaded_file, new_file)
+        elif valik == "mp4":
+            vide = video.streams.get_highest_resolution()
+            vide.download()
         else:
-            video.streams.get_by_itag(nr)
-            video.download()
+            exit()
 print("Download completed")
