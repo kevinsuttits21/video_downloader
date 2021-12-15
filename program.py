@@ -1,8 +1,8 @@
 from pytube import YouTube, Playlist
 import os
 from easygui import *
-# my_video = yt.streams.first() my_video.download(r"C:\Users\kevin.sutt\Downloads")
-# vastake nii moodi näiteks Mis oleks teie allalaadimis asukoht? C:\Users\kevin.sutt\Downloads
+# my_video = yt.streams.first() my_video.download(r"C:\Users\{user}\Downloads")
+# C:\Users\{user}\Downloads
 askings = input("Please enter your download location? ")
 # text = "Do you want to import one video \"video\" or playlist \"playlist\"? "
 # title = "Youtube Video Downloader"
@@ -103,13 +103,13 @@ if choose == "video":
     print(f'Downloading: {yt.title}')
     if valik == "mp3":
         vide = yt.streams.get_by_itag(nr)
-        downloaded_file = vide.download()
+        downloaded_file = vide.download(str(askings))
         base, ext = os.path.splitext(downloaded_file)
         new_file = base + '.mp3'
         os.rename(downloaded_file, new_file)
     elif valik == "mp4":
         vide = yt.streams.get_highest_resolution()
-        vide.download()
+        vide.download(str(askings))
     else:
         exit()
 elif choose == "playlist":
@@ -128,20 +128,14 @@ elif choose == "playlist":
         else:
             if valik == "mp3":
                 video = video.streams.get_by_itag(nr)
-                downloaded_file = video.download()
+                downloaded_file = video.download(str(askings))
                 base, ext = os.path.splitext(downloaded_file)
                 new_file = base + '.mp3'
                 os.rename(downloaded_file, new_file)
             elif valik == "mp4":
                 vide = video.streams.get_highest_resolution()
-                vide.download()
+                vide.download(str(askings))
             else:
                 exit()
                 
-                
-my_video = yt.streams.first()
-my_video.download(str(askings))
-
-
-
 print("Download completed")
