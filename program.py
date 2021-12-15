@@ -1,4 +1,4 @@
-from pytube import YouTube, Playlist
+from pytube import YouTube, Playlist, Search
 import os
 from easygui import *
 import getpass
@@ -13,8 +13,20 @@ else:
 
 choose = input("Do you want to import one video (\"video\") or playlist (\"playlist\")? ").lower()
 
+
 if choose == "video":
-    url = str(input("Enter the link of YouTube video you want to download:  "))
+    
+    search_or_video = str(input("Search or enter link? "))
+    if search_or_video == "search":
+        search = Search(input("Search: "))
+        print(str(len(search.results)) + ": ")
+        tulemus = str(search.results)
+        url = tulemus[0]
+    elif search_or_video == "link":
+        url = str(input("Enter the link of YouTube video you want to download:  "))
+    else:
+        exit()
+        
     yt = YouTube(url)
     try:
         asd = yt.title
