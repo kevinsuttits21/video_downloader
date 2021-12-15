@@ -1,6 +1,9 @@
 from pytube import YouTube, Playlist
 import os
 from easygui import *
+# my_video = yt.streams.first() my_video.download(r"C:\Users\kevin.sutt\Downloads")
+# vastake nii moodi näiteks Mis oleks teie allalaadimis asukoht? C:\Users\kevin.sutt\Downloads
+askings = input("Please enter your download location? ")
 # text = "Do you want to import one video \"video\" or playlist \"playlist\"? "
 # title = "Youtube Video Downloader"
 # input_list = ["Answer"]   
@@ -88,13 +91,14 @@ elif valik == "mp4":
     nr = 137
 else:
     exit()
-    
+
+
 if choose == "video":
     print("----------------------------------------")
     print("Title: ",yt.title)
     print("Views: ",yt.views)
     print("Length of video: ",yt.length) ## teisendada
-    print("Rating of video: ", round(yt.rating, 1))
+    print("Rating of video: ", (yt.rating, 1))
     print("----------------------------------------")
     print(f'Downloading: {yt.title}')
     if valik == "mp3":
@@ -133,4 +137,11 @@ elif choose == "playlist":
                 vide.download()
             else:
                 exit()
+                
+                
+my_video = yt.streams.first()
+my_video.download(str(askings))
+
+
+
 print("Download completed")
