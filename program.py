@@ -95,4 +95,3 @@ elif choose == "playlist":
                 print("Download completed")
             else:
                 exit()
-                
