@@ -2,6 +2,9 @@ from pytube import YouTube, Playlist, Search
 import os
 from easygui import *
 import getpass
+from os import path
+from os.path import exists
+import sys
 
 # my_video = yt.streams.first() my_video.download(r"C:\Users\{user}\Downloads")
 # C:\Users\{user}\Downloads
@@ -10,7 +13,12 @@ if askings == "":
     askings = askings
 else:
     askings = 'C:/Users/' + getpass.getuser() + '/' + str(askings) 
-
+bdd = os.path.isdir(askings)
+if bdd == True:
+    print("The download location is valid.")
+else:
+    print("The Download location is not valid!")
+    exit()
 choose = input("Do you want to import one video (\"video\") or playlist (\"playlist\")? ").lower()
 
 
