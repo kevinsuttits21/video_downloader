@@ -2,15 +2,28 @@ from pytube import YouTube, Playlist, Search
 import os
 from easygui import *
 import getpass
+from os import path
+from os.path import exists
+import sys
+import os.path
+
+
 
 # my_video = yt.streams.first() my_video.download(r"C:\Users\{user}\Downloads")
 # C:\Users\{user}\Downloads
 askings = input("Please enter your download location: ")
 if askings == "":
     askings = askings
+    print("The download location will be the directory where you are using the code")
 else:
-    askings = 'C:/Users/' + getpass.getuser() + '/' + str(askings) 
+    askings = 'C:/Users/' + getpass.getuser() + '/' + str(askings)
+    bruh = askings
+    print("Checking if directory is valid")
+    path = str(bruh)
+    if_file_exists = os.path.exists(path)
+    print(if_file_exists)
 
+              
 choose = input("Do you want to import one video (\"video\") or playlist (\"playlist\")? ").lower()
 
 
@@ -70,8 +83,8 @@ if choose == "video":
         exit()
 elif choose == "playlist":
     print("----------------------------------------")
-    print("Playlist name: ",yt.title)
-    print("Views: ",yt.views)
+    print("Playlist name: ", yt.title)
+    print("Views: ", {yt.views})
     print("Length of playlist: ",yt.length) ## teisendada
     print('Number of videos in playlist: %s' % len(yt.video_urls))
     print("----------------------------------------")
@@ -95,3 +108,8 @@ elif choose == "playlist":
                 print("Download completed")
             else:
                 exit()
+
+print("Checking if the file is successfully downloaded")
+
+                
+
