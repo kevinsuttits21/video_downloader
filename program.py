@@ -170,3 +170,4 @@ elif choose == "playlist":
                 exit()
 
 print("The process is completed.")
+input("Press Enter to continue...")
