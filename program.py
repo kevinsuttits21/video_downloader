@@ -81,17 +81,17 @@ extension = input("Do you want MP3 or MP4? ").lower()
 if extension == "mp3":
     nr = 251
     if Path(location + "/" + yt.title + ".mp3").is_file():
-        print("File exist. Skipping.")
+        print("File exists. Skipping.")
         exit()
     else:
         pass
 elif extension == "mp4":
     nr = 137
     if Path(location + "/" + yt.title + ".mp4").is_file():
-        print("File exist. Skipping.")
+        print("File exists. Skipping.")
         exit()
     else:
-        print("File not exist")
+        print("File doesn't exist")
 else:
     print("Please enter a valid selection!")
     exit()
