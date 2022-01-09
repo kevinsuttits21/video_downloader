@@ -3,6 +3,7 @@ from pytube import YouTube, Playlist
 import getpass
 import os.path
 from pathlib import Path
+import datetime
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -99,8 +100,7 @@ if choose == "video":
     print("----------------------------------------")
     print("Title: ", yt.title)
     print("Views: ", yt.views)
-    print("Length of video: ", yt.length)  ## teisendada
-    print("Rating of video: ", (yt.rating, 1))
+    print("Length of video: ", str(datetime.timedelta(seconds=yt.length)))
     print("----------------------------------------")
     print(f'Downloading: {yt.title}')
     if extension == "mp3":
@@ -123,10 +123,10 @@ if choose == "video":
         print("Please report a bug in GitHub: https://github.com/kermonurmeoja/video_downloader/issues")
         exit()
 elif choose == "playlist":
+    i = 1
     print("----------------------------------------")
     print("Playlist name: ", yt.title)
-    print("Views: ", {yt.views})
-    print("Length of playlist: ", yt.length)  ## teisendada
+    print("Views: ", yt.views)
     print('Number of videos in playlist: %s' % len(yt.video_urls))
     print("----------------------------------------")
     print(f'Downloading: {yt.title}')
@@ -134,26 +134,32 @@ elif choose == "playlist":
         try:
             video = video
         except Exception:
-            print(f"Video {video.title} is unavailable, skipping.")
+            print(f"Video {video.title} is unavailable, skipping." + " (" + str(i) + "/" + str(len(yt.video_urls)) + ")")
+            i = i + 1
         else:
             if extension == "mp3":
                 video = video.streams.get_by_itag(nr)
                 if Path(location + "/" + video.title + ".mp3").is_file() == True:
-                    print(f'Video {video.title} is exists, skipping.')
+                    print(f'Video {video.title} is exists, skipping.' + " (" + str(i) + "/" + str(len(yt.video_urls)) + ")")
+                    i = i + 1
                 else:
-                    print(f"Downloading: {video.title}")
+                    print(f"Downloading: {video.title}" + " (" + str(i) + "/" + str(len(yt.video_urls)) + ")")
                     downloaded_file = video.download(str(location))
                     base, ext = os.path.splitext(downloaded_file)
                     new_file = base + '.mp3'
                     os.rename(downloaded_file, new_file)
                     print("Download of \"" + str(video.title) + "\" completed")
+                    i = i + 1
             elif extension == "mp4":
                 vide = video.streams.get_highest_resolution()
                 if Path(location + "/" + vide.title + ".mp3").is_file() == True:
-                    print(f'Video {vide.title} is exists, skipping.')
+                    print(f'Video {vide.title} is exists, skipping.' + " (" + str(i) + "/" + str(len(yt.video_urls)) + ")")
+                    i = i + 1
                 else:
+                    print(f"Downloading: {vide.title}" + " (" + str(i) + "/" + str(len(yt.video_urls)) + ")")
                     vide.download(str(location))
-                    print("Download completed.")
+                    print("Download of \"" + str(vide.title) + "\" completed")
+                    i = i + 1
             else:
                 print("Error code 105")
                 print("Args of location: " + location)
