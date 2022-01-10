@@ -29,6 +29,7 @@ else:
         print("Error code 101")
         print("Args of location: " + location)
         print("Please report a bug in GitHub: https://github.com/kermonurmeoja/video_downloader/issues")
+        input("Press Enter to continue...")
         exit()
 
 choose = input("Do you want to import one video (\"video\") or playlist (\"playlist\")? ").lower()
@@ -38,6 +39,7 @@ if choose == "video":
         yt = YouTube(url)
     except pytube.exceptions.RegexMatchError:
         print("Please enter a valid URL.")
+        input("Press Enter to continue...")
         exit()
     except Exception:
         print("Error code 102")
@@ -45,6 +47,7 @@ if choose == "video":
         print("Args of choose: " + choose)
         print("Args of URL: " + url)
         print("Please report a bug in GitHub: https://github.com/kermonurmeoja/video_downloader/issues")
+        input("Press Enter to continue...")
         exit()
     else:
         pass
@@ -54,6 +57,7 @@ if choose == "video":
     except Exception as viga:
         print("This video is unavailable!")
         print(str(viga))
+        input("Press Enter to continue...")
         exit()
 
 elif choose == "playlist":
@@ -62,6 +66,7 @@ elif choose == "playlist":
         yt = Playlist(url)
     except pytube.exceptions.RegexMatchError:
         print("Please enter a valid URL.")
+        input("Press Enter to continue...")
         exit()
     except Exception:
         print("Error code 103")
@@ -69,12 +74,14 @@ elif choose == "playlist":
         print("Args of choose: " + choose)
         print("Args of URL: " + url)
         print("Please report a bug in GitHub: https://github.com/kermonurmeoja/video_downloader/issues")
+        input("Press Enter to continue...")
         exit()
     else:
         pass
     yt = Playlist(url)
 else:
     print("Please enter a valid selection!")
+    input("Press Enter to continue...")
     exit()
 
 extension = input("Do you want MP3 or MP4? ").lower()
@@ -82,6 +89,7 @@ if extension == "mp3":
     nr = 251
     if Path(location + "/" + yt.title + ".mp3").is_file():
         print("File exists. Skipping.")
+        input("Press Enter to continue...")
         exit()
     else:
         pass
@@ -89,11 +97,13 @@ elif extension == "mp4":
     nr = 137
     if Path(location + "/" + yt.title + ".mp4").is_file():
         print("File exists. Skipping.")
+        input("Press Enter to continue...")
         exit()
     else:
         print("File doesn't exist")
 else:
     print("Please enter a valid selection!")
+    input("Press Enter to continue...")
     exit()
 
 if choose == "video":
@@ -121,6 +131,7 @@ if choose == "video":
         print("Args of URL: " + url)
         print("Args of extension: " + extension)
         print("Please report a bug in GitHub: https://github.com/kermonurmeoja/video_downloader/issues")
+        input("Press Enter to continue...")
         exit()
 elif choose == "playlist":
     i = 1
@@ -167,6 +178,7 @@ elif choose == "playlist":
                 print("Args of URL: " + url)
                 print("Args of extension: " + extension)
                 print("Please report a bug in GitHub: https://github.com/kermonurmeoja/video_downloader/issues")
+                input("Press Enter to continue...")
                 exit()
 
 print("The process is completed.")
